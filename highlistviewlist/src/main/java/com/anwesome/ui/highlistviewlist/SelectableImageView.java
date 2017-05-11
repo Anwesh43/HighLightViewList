@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +35,8 @@ public class SelectableImageView extends View {
             bitmap = Bitmap.createScaledBitmap(bitmap,4*size/5,4*size/5,true);
             colorFilterImage = new ColorFilterImage();
         }
+        paint.setColor(Color.WHITE);
+        canvas.drawRoundRect(new RectF(0,0,w,h),h/8,h/8,paint);
         colorFilterImage.draw(canvas);
         render++;
     }
@@ -57,7 +60,12 @@ public class SelectableImageView extends View {
             r = 2*h/5;
         }
         public void draw(Canvas canvas) {
+            canvas.save();
+            Path path = new Path();
+            path.addCircle(w/2,h/10+r,r, Path.Direction.CCW);
+            canvas.clipPath(path);
             canvas.drawBitmap(bitmap,w/2-r,h/10,paint);
+            canvas.restore();
             paint.setColor(Color.argb(150,Color.red(color),Color.green(color),Color.blue(color)));
             canvas.drawArc(new RectF(w/2-r,h/10,w/2+r,h/10+2*r),0,deg,true,paint);
         }

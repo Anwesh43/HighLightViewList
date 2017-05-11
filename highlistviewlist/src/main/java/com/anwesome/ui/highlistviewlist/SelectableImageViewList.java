@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * Created by anweshmishra on 11/05/17.
  */
 public class SelectableImageViewList extends ViewGroup {
-    int w ,h;
+    int w ,h,viewHeight;
     public SelectableImageViewList(Context context) {
          super(context);
          initDimension(context);
@@ -25,6 +25,7 @@ public class SelectableImageViewList extends ViewGroup {
             display.getRealSize(size);
             w = size.x;
             h = size.y;
+            viewHeight = Math.max(w,h)/5;
         }
     }
     public void addImage(Bitmap bitmap, SelectableImageView.OnTapListener onTapListener) {
@@ -38,7 +39,7 @@ public class SelectableImageViewList extends ViewGroup {
         for(int i=0;i<getChildCount();i++) {
             View child = getChildAt(i);
             measureChild(child,wspec,hspec);
-            hNew += Math.max(w,h)/3;
+            hNew += viewHeight+h/20;
         }
         setMeasuredDimension(w,Math.max(hNew,h));
 
@@ -47,8 +48,8 @@ public class SelectableImageViewList extends ViewGroup {
         int y = h/10;
         for(int i=0;i<getChildCount();i++) {
             View child = getChildAt(i);
-            child.layout(w/20,y,w-w/20,y+h);
-            y += Math.max(w,h)/3;
+            child.layout(w/20,y,w-w/20,y+viewHeight);
+            y += viewHeight+h/20;
         }
     }
 }
