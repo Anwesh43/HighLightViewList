@@ -18,6 +18,10 @@ public class SelectableImageView extends View {
     private ColorFilterImage colorFilterImage;
     private int color = Color.parseColor("#FF6F00");
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private OnTapListener onTapListener;
+    public void setOnTapListener(OnTapListener onTapListener) {
+        this.onTapListener = onTapListener;
+    }
     public SelectableImageView(Context context,Bitmap bitmap) {
         super(context);
         this.bitmap = bitmap;
@@ -34,8 +38,8 @@ public class SelectableImageView extends View {
         render++;
     }
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN) {
-
+        if(event.getAction() == MotionEvent.ACTION_DOWN && onTapListener != null) {
+            onTapListener.onTap();
         }
         return true;
     }
@@ -63,5 +67,8 @@ public class SelectableImageView extends View {
         public void down(float factor) {
             deg = 360*(1-factor);
         }
+    }
+    private interface OnTapListener {
+        void onTap();
     }
 }
