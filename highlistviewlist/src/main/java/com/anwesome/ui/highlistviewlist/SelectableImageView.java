@@ -41,7 +41,7 @@ public class SelectableImageView extends View {
         render++;
     }
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN && onTapListener != null) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN && onTapListener != null && colorFilterImage.handleTap(event.getX(),event.getY())) {
             onTapListener.onTap(this);
         }
         return true;
@@ -74,6 +74,9 @@ public class SelectableImageView extends View {
         }
         public void down(float factor) {
             deg = 360*(1-factor);
+        }
+        public boolean handleTap(float x,float y) {
+            return x>=w/2-r && x<=w/2+r && y>=h/10 && y<=h/10+2*r;
         }
     }
     public interface OnTapListener {
