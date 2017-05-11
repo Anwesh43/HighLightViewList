@@ -24,7 +24,7 @@ public class HighlightViewList {
         scrollView = new ScrollView(activity);
         scrollView.addView(selectableImageViewList,new WindowManager.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         hightLightView = new HightLightView(activity);
-        animationHandler = new AnimationHandler();
+        animationHandler = new AnimationHandler(hightLightView);
 
     }
     public void addImage(Bitmap bitmap) {
