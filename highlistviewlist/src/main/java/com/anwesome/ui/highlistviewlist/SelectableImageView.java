@@ -54,6 +54,9 @@ public class SelectableImageView extends View {
         colorFilterImage.down(factor);
         postInvalidate();
     }
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
     private class ColorFilterImage {
         private float r,deg = 0;
         public ColorFilterImage() {
