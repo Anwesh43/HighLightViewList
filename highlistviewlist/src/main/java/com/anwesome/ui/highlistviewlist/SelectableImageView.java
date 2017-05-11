@@ -68,7 +68,7 @@ public class SelectableImageView extends View {
             deg = 360*(1-factor);
         }
     }
-    private interface OnTapListener {
+    public interface OnTapListener {
         void onTap();
     }
 }
