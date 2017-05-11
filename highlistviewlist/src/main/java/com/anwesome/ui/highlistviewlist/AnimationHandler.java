@@ -14,6 +14,10 @@ public class AnimationHandler extends AnimatorListenerAdapter implements ValueAn
         mainAnimator.addUpdateListener(this);
         mainAnimator.addListener(this);
     }}
+    private HightLightView hightLightView;
+    public AnimationHandler(HightLightView hightLightView) {
+        this.hightLightView = hightLightView;
+    }
     private SelectableImageView prevView,currView;
     private boolean isAnimating = false;
     private void setView(SelectableImageView currView) {
@@ -25,6 +29,9 @@ public class AnimationHandler extends AnimatorListenerAdapter implements ValueAn
     public void onAnimationEnd(Animator animator) {
         if(isAnimating) {
             isAnimating = false;
+            if(hightLightView != null) {
+                hightLightView.stop();
+            }
         }
     }
 
@@ -35,6 +42,9 @@ public class AnimationHandler extends AnimatorListenerAdapter implements ValueAn
         }
         if(prevView != null) {
             prevView.down(factor);
+        }
+        if(hightLightView != null) {
+            hightLightView.update(factor);
         }
     }
     private void animate() {

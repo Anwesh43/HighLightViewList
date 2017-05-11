@@ -15,6 +15,7 @@ public class HighlightViewList {
     private ScrollView scrollView;
     private SelectableImageViewList selectableImageViewList;
     private Activity activity;
+    private HightLightView hightLightView;
     private boolean isShown = false;
     private AnimationHandler animationHandler;
     public HighlightViewList(Activity activity) {
@@ -22,7 +23,9 @@ public class HighlightViewList {
         selectableImageViewList = new SelectableImageViewList(activity);
         scrollView = new ScrollView(activity);
         scrollView.addView(selectableImageViewList,new WindowManager.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        hightLightView = new HightLightView(activity);
         animationHandler = new AnimationHandler();
+
     }
     public void addImage(Bitmap bitmap) {
         if(!isShown) {
