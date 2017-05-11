@@ -41,6 +41,7 @@ public class HighlightViewList {
             relativeLayout.addView(hightLightView,new ViewGroup.LayoutParams(size.x/2,size.x/2));
             relativeLayout.addView(scrollView,new ViewGroup.LayoutParams(size.x,size.y-size.x/2-size.y/10));
             hightLightView.setY(size.y/20);
+            hightLightView.setX(size.x/4);
             scrollView.setY(size.x/2+size.y/10);
         }
     }
