@@ -12,6 +12,7 @@ public class AnimationHandler extends AnimatorListenerAdapter implements ValueAn
     {{
         mainAnimator.setDuration(1000);
         mainAnimator.addUpdateListener(this);
+        mainAnimator.addListener(this);
     }}
     private SelectableImageView prevView,currView;
     private boolean isAnimating = false;
@@ -22,8 +23,8 @@ public class AnimationHandler extends AnimatorListenerAdapter implements ValueAn
         this.currView = currView;
     }
     public void onAnimationEnd(Animator animator) {
-        if(!isAnimating) {
-            isAnimating = true;
+        if(isAnimating) {
+            isAnimating = false;
         }
     }
 
