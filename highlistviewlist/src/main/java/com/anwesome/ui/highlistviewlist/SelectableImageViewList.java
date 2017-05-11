@@ -35,21 +35,21 @@ public class SelectableImageViewList extends ViewGroup {
         requestLayout();
     }
     public void onMeasure(int wspec,int hspec) {
-        int hNew = h/10;
+        int hNew = h/40;
         for(int i=0;i<getChildCount();i++) {
             View child = getChildAt(i);
             measureChild(child,wspec,hspec);
-            hNew += viewHeight+h/20;
+            hNew += viewHeight+h/40;
         }
         setMeasuredDimension(w,Math.max(hNew,h));
 
     }
     public void onLayout(boolean reloaded,int a,int b,int w,int h) {
-        int y = h/10;
+        int y = h/40;
         for(int i=0;i<getChildCount();i++) {
             View child = getChildAt(i);
             child.layout(w/20,y,w-w/20,y+viewHeight);
-            y += viewHeight+h/20;
+            y += viewHeight+h/40;
         }
     }
 }
