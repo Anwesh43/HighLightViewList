@@ -3,7 +3,9 @@ package com.anwesome.ui.highlistviewlist;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -13,6 +15,7 @@ import android.view.View;
 public class SelectableImageView extends View {
     private Bitmap bitmap;
     private int w,h,render = 0;
+    private int color = Color.parseColor("#FF6F00");
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public SelectableImageView(Context context,Bitmap bitmap) {
         super(context);
@@ -22,12 +25,38 @@ public class SelectableImageView extends View {
         if(render == 0) {
             w = canvas.getWidth();
             h = canvas.getHeight();
-            bitmap = Bitmap.createScaledBitmap(bitmap,4*h/5,4*h/5,true);
+            int size = Math.min(w,h);
+            bitmap = Bitmap.createScaledBitmap(bitmap,4*size/5,4*size/5,true);
         }
-
         render++;
     }
     public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+
+        }
         return true;
+    }
+    public void up(float factor) {
+
+    }
+    public void down(float factor) {
+
+    }
+    private class ColorFilterImage {
+        private float r,deg = 0;
+        public ColorFilterImage() {
+            r = 2*h/5;
+        }
+        public void draw(Canvas canvas) {
+            canvas.drawBitmap(bitmap,w/2-r,h/10,paint);
+            paint.setColor(Color.argb(150,Color.red(color),Color.green(color),Color.blue(color)));
+            canvas.drawArc(new RectF(w/2-r,h/10,w/2+r,h/10+2*r),0,deg,true,paint);
+        }
+        public void up(float factor) {
+            deg = 360*factor;
+        }
+        public void down(float factor) {
+            deg = 360*(1-factor);
+        }
     }
 }
