@@ -15,6 +15,7 @@ import android.view.View;
 public class SelectableImageView extends View {
     private Bitmap bitmap;
     private int w,h,render = 0;
+    private ColorFilterImage colorFilterImage;
     private int color = Color.parseColor("#FF6F00");
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public SelectableImageView(Context context,Bitmap bitmap) {
@@ -27,7 +28,9 @@ public class SelectableImageView extends View {
             h = canvas.getHeight();
             int size = Math.min(w,h);
             bitmap = Bitmap.createScaledBitmap(bitmap,4*size/5,4*size/5,true);
+            colorFilterImage = new ColorFilterImage();
         }
+        colorFilterImage.draw(canvas);
         render++;
     }
     public boolean onTouchEvent(MotionEvent event) {
@@ -37,10 +40,12 @@ public class SelectableImageView extends View {
         return true;
     }
     public void up(float factor) {
-
+        colorFilterImage.up(factor);
+        postInvalidate();
     }
     public void down(float factor) {
-
+        colorFilterImage.down(factor);
+        postInvalidate();
     }
     private class ColorFilterImage {
         private float r,deg = 0;
