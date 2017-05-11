@@ -16,18 +16,20 @@ public class HighlightViewList {
     private SelectableImageViewList selectableImageViewList;
     private Activity activity;
     private boolean isShown = false;
+    private AnimationHandler animationHandler;
     public HighlightViewList(Activity activity) {
         this.activity = activity;
         selectableImageViewList = new SelectableImageViewList(activity);
         scrollView = new ScrollView(activity);
         scrollView.addView(selectableImageViewList,new WindowManager.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        animationHandler = new AnimationHandler();
     }
     public void addImage(Bitmap bitmap) {
         if(!isShown) {
             selectableImageViewList.addImage(bitmap, new SelectableImageView.OnTapListener() {
                 @Override
-                public void onTap() {
-
+                public void onTap(SelectableImageView selectableImageView) {
+                    animationHandler.startAnimatingForNewView(selectableImageView);
                 }
             });
         }

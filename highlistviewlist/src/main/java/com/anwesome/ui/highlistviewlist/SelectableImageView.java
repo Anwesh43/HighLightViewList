@@ -39,7 +39,7 @@ public class SelectableImageView extends View {
     }
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN && onTapListener != null) {
-            onTapListener.onTap();
+            onTapListener.onTap(this);
         }
         return true;
     }
@@ -69,6 +69,6 @@ public class SelectableImageView extends View {
         }
     }
     public interface OnTapListener {
-        void onTap();
+        void onTap(SelectableImageView selectableImageView);
     }
 }
